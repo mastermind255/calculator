@@ -1,3 +1,4 @@
+
 let dispaly = document.getElementById('display');
 let btn9 = document.getElementById('btn9');
 let btn8 = document.getElementById('btn8');
@@ -16,32 +17,40 @@ let btnMul = document.getElementById('btn*');
 let btnSub = document.getElementById('btn-');
 let btnParan1 = document.getElementById('btn(');
 let btnParan2 = document.getElementById('btn)');
-let arrDisplay =[];
-let arrDuplicate=[];
+let arrDisplay = [];
+let arrDuplicate = [];
 let btnPlusSub = document.getElementById('btnPlusSub');
 let btnOk = document.getElementById('btnOk');
 let btnClear = document.getElementById('btnClear');
 let btnCancel = document.getElementById('btnCancel');
 let btnPercent = document.getElementById('btnPercent');
 let flage = true;
+let btnsqrt = document.getElementById('btnsqrt');
+let btncos = document.getElementById('btncos');
+let btnsin = document.getElementById('btnsin');
+let btntan = document.getElementById('btntan');
+let btnExp = document.getElementById('btnExp');
+let btnln = document.getElementById('btnln');
+let btnsq = document.getElementById('btnsq');
+
 
 // dispaly.innerText = 'This is calculator';
 // console.log(dispaly.innerText);
 
-function updateDisplay(){
-    for(let i in arrDisplay){
-        if(arrDisplay[i] === '*'){
+function updateDisplay() {
+    for (let i in arrDisplay) {
+        if (arrDisplay[i] === '*') {
             arrDuplicate.push('X');
         }
-        else if(arrDisplay[i] === '/'){
+        else if (arrDisplay[i] === '/') {
             arrDuplicate.push('÷');
         }
-        else if(arrDisplay[i] === '%'){
+        else if (arrDisplay[i] === '%') {
             arrDuplicate.push('%');
             arrDisplay.pop();
             arrDisplay.push('*0.01');
         }
-        else{
+        else {
             arrDuplicate.push(arrDisplay[i]);
         }
     }
@@ -52,16 +61,314 @@ function updateDisplay(){
     dispaly.innerText = dis;
 }
 
-function displayResult(){
+function sqrtFunction() {
+    let startIndex;
+    let endIndex;
+    let countElement = 0;
+    let demoList = [];
+    // console.log(arrDisplay);
+    for (i in arrDisplay) {
+        if (arrDisplay[i] === '√(') {
+            startIndex = i;
+            countElement++;
+        }
+        else if (arrDisplay[i] === ')') {
+            endIndex = i;
+            countElement++;
+            break;
+        }
+        else {
+            countElement++;
+            demoList.push(arrDisplay[i]);
+        }
+    }
+
+    let dis = demoList.join('');
+    // console.log(eval(dis))
+    let sqrtResult = eval(dis);
+
+    // console.log(sqrtResult);
+    sqrtResult = Math.sqrt(sqrtResult);
+    // console.log(sqrtResult);
+
+    arrDisplay.splice(startIndex, countElement, sqrtResult);
+    // console.log(arrDisplay);
+
+}
+
+function cosFunction() {
+    let startIndex;
+    let endIndex;
+    let countElement = 0;
+    let demoList = [];
+    // console.log(arrDisplay);
+    for (i in arrDisplay) {
+        if (arrDisplay[i] === 'cos(') {
+            startIndex = i;
+            countElement++;
+        }
+        else if (arrDisplay[i] === ')') {
+            endIndex = i;
+            countElement++;
+            break;
+        }
+        else {
+            countElement++;
+            demoList.push(arrDisplay[i]);
+        }
+    }
+
+    let dis = demoList.join('');
+    // console.log(eval(dis))
+    let sqrtResult = eval(dis);
+
+    // console.log(sqrtResult);
+    sqrtResult = Math.cos(sqrtResult);
+    // console.log(sqrtResult);
+
+    arrDisplay.splice(startIndex, countElement, sqrtResult);
+    // console.log(arrDisplay);
+
+}
+
+
+function sinFunction() {
+    let startIndex;
+    let endIndex;
+    let countElement = 0;
+    let demoList = [];
+    // console.log(arrDisplay);
+    for (i in arrDisplay) {
+        if (arrDisplay[i] === 'sin(') {
+            startIndex = i;
+            countElement++;
+        }
+        else if (arrDisplay[i] === ')') {
+            endIndex = i;
+            countElement++;
+            break;
+        }
+        else {
+            countElement++;
+            demoList.push(arrDisplay[i]);
+        }
+    }
+
+    let dis = demoList.join('');
+    // console.log(eval(dis))
+    let sqrtResult = eval(dis);
+
+    // console.log(sqrtResult);
+    sqrtResult = Math.sin(sqrtResult);
+    // console.log(sqrtResult);
+
+    arrDisplay.splice(startIndex, countElement, sqrtResult);
+    // console.log(arrDisplay);
+
+}
+
+function tanFunction() {
+    let startIndex;
+    let endIndex;
+    let countElement = 0;
+    let demoList = [];
+    // console.log(arrDisplay);
+    for (i in arrDisplay) {
+        if (arrDisplay[i] === 'tan(') {
+            startIndex = i;
+            countElement++;
+        }
+        else if (arrDisplay[i] === ')') {
+            endIndex = i;
+            countElement++;
+            break;
+        }
+        else {
+            countElement++;
+            demoList.push(arrDisplay[i]);
+        }
+    }
+
+    let dis = demoList.join('');
+    // console.log(eval(dis))
+    let sqrtResult = eval(dis);
+
+    // console.log(sqrtResult);
+    sqrtResult = Math.tan(sqrtResult);
+    // console.log(sqrtResult);
+
+    arrDisplay.splice(startIndex, countElement, sqrtResult);
+    // console.log(arrDisplay);
+
+}
+
+
+function expFunction() {
+    let startIndex;
+    let countElement = 0;
+    // console.log(arrDisplay);
+    for (i in arrDisplay) {
+        if (arrDisplay[i] === 'e') {
+            startIndex = i;
+            countElement++;
+            break;
+        }
+    }
+
+    arrDisplay.splice(startIndex, countElement, Math.E);
+
+}
+
+function lnFunction() {
+    let startIndex;
+    let endIndex;
+    let countElement = 0;
+    let demoList = [];
+    // console.log(arrDisplay);
+    for (i in arrDisplay) {
+        if (arrDisplay[i] === 'ln(') {
+            startIndex = i;
+            countElement++;
+        }
+        else if (arrDisplay[i] === ')') {
+            endIndex = i;
+            countElement++;
+            break;
+        }
+        else {
+            countElement++;
+            demoList.push(arrDisplay[i]);
+        }
+    }
+
+    let dis = demoList.join('');
+    // console.log(eval(dis))
+    let sqrtResult = eval(dis);
+
+    // console.log(sqrtResult);
+    sqrtResult = Math.log(sqrtResult);
+    // console.log(sqrtResult);
+
+    arrDisplay.splice(startIndex, countElement, sqrtResult);
+    // console.log(arrDisplay);
+
+}
+
+function sqFunction(){
+    let startIndex;
+    let countElement = 0;
+    // console.log(arrDisplay);
+    for (i in arrDisplay) {
+        if (arrDisplay[i] === '^(2)') {
+            startIndex = i;
+            countElement++;
+            break;
+        }
+    }
+
+    let preElement = arrDisplay[startIndex-1];
+    // console.log(preElement);
+    // console.log(Math.pow(preElement, 2))
+    // console.log(startIndex, countElement);
+
+    arrDisplay.splice(startIndex-1, countElement+1, Math.pow(preElement,2));
+
+}
+
+function displayResult() {
     flage = false;
+
+
+    // sqrt
+    let countSqrt = 0;
+    for (let i of arrDisplay) {
+        if (i === '√(') {
+            countSqrt++;
+        }
+    }
+    for (let i = 0; i < countSqrt; i++) {
+        sqrtFunction();
+    }
+
+    // cos
+    let countCos = 0;
+    for (let i of arrDisplay) {
+        if (i === 'cos(') {
+            countCos++;
+        }
+    }
+    for (let i = 0; i < countCos; i++) {
+        cosFunction();
+    }
+
+    // sin
+    let countSin = 0;
+    for (let i of arrDisplay) {
+        if (i === 'sin(') {
+            countSin++;
+        }
+    }
+    for (let i = 0; i < countSin; i++) {
+        sinFunction();
+    }
+
+
+    // tan
+    let countTan = 0;
+    for (let i of arrDisplay) {
+        if (i === 'tan(') {
+            countTan++;
+        }
+    }
+    for (let i = 0; i < countTan; i++) {
+        tanFunction();
+    }
+
+    // exp
+    let countExp = 0;
+    for(let i of arrDisplay){
+        if(i === 'e'){
+            countExp++;
+        }
+    }
+    for(let i=0; i<countExp; i++){
+        expFunction();
+    }
+
+    // ln
+    let countLn = 0;
+    for(let i of arrDisplay){
+        if(i === 'ln('){
+            countLn++;
+        }
+    }
+    for(let i=0; i<countLn; i++){
+        lnFunction();
+    }
+
+    // sq 
+    let countSq = 0;
+    for(let i of arrDisplay){
+        if(i === '^(2)'){
+            countSq++;
+        }
+    }
+    for(let i=0; i<countSq; i++){
+        sqFunction();
+    }
+
+
+
     let dis = arrDisplay.join('');
     // console.log(dis);
     let result;
-    try{
+    try {
         result = eval(dis);
         dispaly.innerText = result;
+        arrDisplay = [];
+        arrDisplay.push(result);
     }
-    catch(e){
+    catch (e) {
         dispaly.innerText = 'Error Occured';
     }
 }
@@ -78,7 +385,7 @@ btn8.addEventListener('click', () => {
     arrDisplay.push(8);
     updateDisplay();
 });
-btn7.addEventListener('click',() => {
+btn7.addEventListener('click', () => {
     arrDisplay.push(7);
     updateDisplay();
 });
@@ -130,6 +437,7 @@ btnParan1.addEventListener('click', () => {
     arrDisplay.push('(');
     updateDisplay();
 });
+
 btnParan2.addEventListener('click', () => {
     arrDisplay.push(')');
     updateDisplay();
@@ -153,27 +461,138 @@ btnPercent.addEventListener('click', () => {
 
 
 btnPlusSub.addEventListener('click', () => {
-    if(arrDisplay[arrDisplay.length-1] === '*' || arrDisplay[arrDisplay.length-1] === '-' || arrDisplay[arrDisplay.length-1] === '+' || arrDisplay[arrDisplay.length-1] === '/'){
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
         arrDisplay.push('(-');
     }
-    else if(arrDisplay.length === 0){
+    else if (arrDisplay.length === 0) {
         arrDisplay.push('(-');
     }
-    else{
+    else {
         arrDisplay.push('*');
         arrDisplay.push('(-');
     }
     updateDisplay();
 });
 
+btnsqrt.addEventListener('click', () => {
 
-btnClear.addEventListener('click',() => {
-    if(flage){
+    // arrDisplay.push('√(');
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        arrDisplay.push('√(');
+    }
+    else if (arrDisplay.length === 0) {
+        arrDisplay.push('√(');
+    }
+    else {
+        arrDisplay.push('*');
+        arrDisplay.push('√(');
+    }
+    updateDisplay();
+})
+
+btncos.addEventListener('click', () => {
+    // arrDisplay.push('cos(');
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        arrDisplay.push('cos(');
+    }
+    else if (arrDisplay.length === 0) {
+        arrDisplay.push('cos(');
+    }
+    else {
+        arrDisplay.push('*');
+        arrDisplay.push('cos(');
+    }
+    updateDisplay();
+})
+
+
+btnsin.addEventListener('click', () => {
+    // arrDisplay.push('sin(');
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        arrDisplay.push('sin(');
+    }
+    else if (arrDisplay.length === 0) {
+        arrDisplay.push('sin(');
+    }
+    else {
+        arrDisplay.push('*');
+        arrDisplay.push('sin(');
+    }
+    updateDisplay();
+})
+
+btntan.addEventListener('click', () => {
+    // arrDisplay.push('tan(');
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        arrDisplay.push('tan(');
+    }
+    else if (arrDisplay.length === 0) {
+        arrDisplay.push('tan(');
+    }
+    else {
+        arrDisplay.push('*');
+        arrDisplay.push('tan(');
+    }
+    updateDisplay();
+
+})
+
+btnExp.addEventListener('click', () => {
+    // arrDisplay.push('e');
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        arrDisplay.push('e');
+    }
+    else if (arrDisplay.length === 0) {
+        arrDisplay.push('e');
+    }
+    else {
+        arrDisplay.push('*');
+        arrDisplay.push('e');
+    }
+    updateDisplay();
+
+})
+
+btnln.addEventListener('click', () => {
+    // arrDisplay.push('ln(');
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        arrDisplay.push('ln(');
+    }
+    else if (arrDisplay.length === 0) {
+        arrDisplay.push('ln(');
+    }
+    else {
+        arrDisplay.push('*');
+        arrDisplay.push('ln(');
+    }
+    updateDisplay();
+
+})
+
+btnsq.addEventListener('click', () => {
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        // arrDisplay.push('ln(');
+        alert('Invalid Format');
+    }
+    else if (arrDisplay.length === 0) {
+        // arrDisplay.push('ln');
+        alert('Invalid Format');
+    }
+    else if(Number.isInteger(arrDisplay[arrDisplay.length-1])){
+        arrDisplay.push('^(2)');
+    }
+    updateDisplay();
+    
+})
+
+
+btnClear.addEventListener('click', () => {
+    if (flage) {
         arrDisplay.pop();
         arrDuplicate.pop();
         updateDisplay();
     }
-    else{
+    else {
         flage = true;
         arrDisplay = [];
         arrDuplicate = [];
