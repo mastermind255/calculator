@@ -254,10 +254,12 @@ function lnFunction() {
 
 }
 
-function sqFunction(){
+
+
+function sqFunction() {
     let startIndex;
     let countElement = 0;
-    // console.log(arrDisplay);
+
     for (i in arrDisplay) {
         if (arrDisplay[i] === '^(2)') {
             startIndex = i;
@@ -266,13 +268,44 @@ function sqFunction(){
         }
     }
 
-    let preElement = arrDisplay[startIndex-1];
-    // console.log(preElement);
-    // console.log(Math.pow(preElement, 2))
-    // console.log(startIndex, countElement);
+    let startInt = startIndex - 1;
+    let endInt;
 
-    arrDisplay.splice(startIndex-1, countElement+1, Math.pow(preElement,2));
+    let intArry = [];
 
+    if (Number.isInteger(arrDisplay[startInt])) {
+        if (startInt === 0) {
+            intArry.push(arrDisplay[startInt]);
+        }
+        else if (Number.isInteger(arrDisplay[startInt])) {
+            while (Number.isInteger(arrDisplay[startInt])) {
+                intArry.push(arrDisplay[startInt]);
+                if (startInt === 0) {
+                    break;
+                }
+                countElement++;
+                endInt = startInt;
+                startInt--;
+            }
+            startInt++;
+        }
+    }
+    else if (arrDisplay[startInt] === ')') {
+        while (!(arrDisplay[startInt] === '(')) {
+            intArry.push(arrDisplay[startInt]);
+            countElement++;
+            startInt--;
+        }
+        intArry.reverse().pop();
+        intArry.reverse();
+    }
+    
+
+    // let preElement = parseInt(intArry.reverse().join(''));
+    let preElement = intArry.reverse().join('');
+    preElement = eval(preElement);
+
+    arrDisplay.splice(startInt, countElement + 1, Math.pow(preElement, 2));
 }
 
 function displayResult() {
@@ -326,34 +359,34 @@ function displayResult() {
 
     // exp
     let countExp = 0;
-    for(let i of arrDisplay){
-        if(i === 'e'){
+    for (let i of arrDisplay) {
+        if (i === 'e') {
             countExp++;
         }
     }
-    for(let i=0; i<countExp; i++){
+    for (let i = 0; i < countExp; i++) {
         expFunction();
     }
 
     // ln
     let countLn = 0;
-    for(let i of arrDisplay){
-        if(i === 'ln('){
+    for (let i of arrDisplay) {
+        if (i === 'ln(') {
             countLn++;
         }
     }
-    for(let i=0; i<countLn; i++){
+    for (let i = 0; i < countLn; i++) {
         lnFunction();
     }
 
     // sq 
     let countSq = 0;
-    for(let i of arrDisplay){
-        if(i === '^(2)'){
+    for (let i of arrDisplay) {
+        if (i === '^(2)') {
             countSq++;
         }
     }
-    for(let i=0; i<countSq; i++){
+    for (let i = 0; i < countSq; i++) {
         sqFunction();
     }
 
@@ -434,7 +467,17 @@ btnSub.addEventListener('click', () => {
     updateDisplay();
 });
 btnParan1.addEventListener('click', () => {
-    arrDisplay.push('(');
+    // arrDisplay.push('(');
+    if (arrDisplay[arrDisplay.length - 1] === '*' || arrDisplay[arrDisplay.length - 1] === '-' || arrDisplay[arrDisplay.length - 1] === '+' || arrDisplay[arrDisplay.length - 1] === '/') {
+        arrDisplay.push('(');
+    }
+    else if (arrDisplay.length === 0) {
+        arrDisplay.push('(');
+    }
+    else {
+        arrDisplay.push('*');
+        arrDisplay.push('(');
+    }
     updateDisplay();
 });
 
@@ -578,11 +621,14 @@ btnsq.addEventListener('click', () => {
         // arrDisplay.push('ln');
         alert('Invalid Format');
     }
-    else if(Number.isInteger(arrDisplay[arrDisplay.length-1])){
+    else if (Number.isInteger(arrDisplay[arrDisplay.length - 1])) {
+        arrDisplay.push('^(2)');
+    }
+    else if (arrDisplay[arrDisplay.length - 1] === ')') {
         arrDisplay.push('^(2)');
     }
     updateDisplay();
-    
+
 })
 
 
@@ -598,9 +644,14 @@ btnClear.addEventListener('click', () => {
         arrDuplicate = [];
         let dis = dispaly.innerText.split('');
         dis.pop();
-        dis = dis.join('');
-        arrDisplay.push(dis);
-        dispaly.innerText = '';
+        
+        // dis = dis.join('');
+        // arrDisplay.push(dis);
+        // dispaly.innerText = '';
+
+        for(let i of dis){
+            arrDisplay.push(i);
+        }
         updateDisplay();
     }
 });
